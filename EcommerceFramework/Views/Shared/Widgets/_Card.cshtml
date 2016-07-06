@@ -1,0 +1,11 @@
+﻿@model List<EcommerceFramework.ViewModels.Widgets.WidgetCard>
+
+@foreach (var widget in Model)
+{
+    <div class="col-md-4" style="text-align: center">
+        <h2>@widget.Title</h2>
+        <img src="@widget.ImageUri" class="img-responsive" style="width: 100%" alt="@widget.Title" />
+    </div>
+
+}
+

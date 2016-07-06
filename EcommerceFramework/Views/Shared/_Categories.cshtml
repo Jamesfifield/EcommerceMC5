@@ -1,0 +1,45 @@
+﻿@model List<System.Linq.IGrouping<string, EcommerceFramework.Models.Category>>
+
+<div class="container">
+    <div class="navbar navbar-default">
+
+
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                @foreach (var category in Model)
+                {
+
+
+                    <li role="presentation" class="dropdown">
+                        
+                        @Html.ActionLink(category.Key, "Index", "Products", new {Id = category.Key }, new
+                   {
+                       @class = "dropdown-toggle",
+                       data_toggle = "dropdown",
+                       role = "button",
+                       aria_haspopup = "true",
+                       aria_expanded = "false"
+
+                   })
+
+                        <ul class="dropdown-menu">
+                            <li>
+                                @Html.ActionLink("All " + category.Key, "Index", "Products", new { Id = category.Key }, null)
+                            </li>
+                            @foreach (var subCategory in category)
+                            {
+                                <li>
+                                    <a href="#">@subCategory.Name</a>
+                                </li>
+                            }
+                        </ul>
+
+                    </li>
+                }
+            </ul>
+
+
+
+        </div>
+    </div>
+</div>

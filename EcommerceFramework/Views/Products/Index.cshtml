@@ -1,0 +1,107 @@
+﻿@using EcommerceFramework.Models
+@model System.Collections.Generic.List<EcommerceFramework.Models.Product>
+
+@{
+    ViewBag.Title = "Products";
+    string rootCategory = ViewBag.RootNode;
+
+}
+
+
+<div class="container">
+    <div class="well well-sm">
+        @Html.ActionLink("Home", "Index", "Home") / @Html.ActionLink(rootCategory, "Index", new { Id = rootCategory })
+       
+           
+        </div>
+  
+</div>
+
+<ul class="sub-links">
+    @{
+        var counter = 0;
+        foreach (Category category in ViewBag.NestedCategories)
+        {
+            if (counter % 3 == 0)
+            {
+                @:</ul><ul class="sub-links">
+                }
+                <li>
+                    <a href="#">@category.Name</a>
+                </li>
+                counter++;
+                }
+
+                }
+
+            </ul>
+
+
+
+            <table class="table table-striped">
+                <tr>
+                    <th></th>
+                    <th>Title</th>
+                    <th>Category</th>
+
+                    <th>
+                        <div class="btn-group pull-right btn-group-sm" role="group">
+                            <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span></button>
+                            <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-th" aria-hidden="true"></span></button>
+                        </div>
+                    </th>
+                </tr>
+
+
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td style="width: 160px">
+                            <img width="150" src="@item.ImageUri" alt="@item.Name" />
+                        </td>
+                        <td>@item.Name</td>
+                        <td>@item.RootCategoryId</td>
+
+
+                        <td>
+                            <button class="btn btn-primary" data-product-id="@item.Id">Add To cart</button>
+                        </td>
+                    </tr>
+
+                }
+
+
+            </table>
+
+            <style>
+                .sub-links {
+                    display: inline-block;
+                    list-style: none;
+                }
+            </style>
+
+            @section scripts{
+                <script>
+                    $(function () {
+                        $("button[data-product-id]")
+                            .click(function () {
+                                var button = $(this);
+                                var data = button.attr("data-product-id");
+
+                                $.post('/api/ShopingCart/Add', { "": data })
+                                    .done(function (d) {
+                                        console.log(d);
+                                    })
+                                    .fail(function (r) {
+                                        alert("Request Failed");
+                                        console.log(r);
+                                    });
+
+
+                            });
+
+                    })
+                </script>
+
+            }

@@ -1,0 +1,26 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1>IStore</h1>
+    <p class="lead">Because Life is Awesome</p>
+    <p><a href="http://asp.net" class="btn btn-primary btn-lg">Shop Now &raquo;</a>
+    </p>
+</div>
+
+<div class="row" style="text-align: center" >
+    <h2 >Welcome to our Store</h2>
+    <hr/>
+    <span>
+        Tincidunt integer eu augue augue nunc elit dolor, luctus placerat scelerisque euismod, iaculis eu lacus nunc mi elit, vehicula ut laoreet ac, aliquam sit amet justo nunc tempor, metus vel.
+        Placerat suscipit, orci nisl iaculis eros, a tincidunt nisi odio eget lorem iat augue cras ut metus a risus.
+       
+    </span>
+</div>
+
+<div class="row">
+   @{
+       Html.RenderAction("Card", "Widget");
+   }
+</div>
